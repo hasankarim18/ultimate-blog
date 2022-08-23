@@ -1,9 +1,14 @@
 import React from 'react'
 
 const Blog = (props) => {
-    console.log(props)
 
-    const { id, image, title, userId, date, body } = props.blog
+
+    const { id, image, title, userId, date, body, category } = props.blog
+    // const { name } = props.user
+    //const userImage = props.user.image
+    // console.log(props.user)
+    const userName = props.user.name
+    const userImage = props.user.image
 
     return (
         // < !--single card-- >
@@ -24,9 +29,10 @@ const Blog = (props) => {
                 <div className="flex-1">
                     <p className="text-sm font-medium text-indigo-600">
                         <span
+                            style={{ textTransform: "capitalize" }}
                             className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800"
                         >
-                            Article
+                            {category}
                         </span>
                     </p>
                     <a href="#" className="block mt-1">
@@ -41,7 +47,7 @@ const Blog = (props) => {
                     <div className="flex-shrink-0">
                         <img
                             className="h-10 w-10 rounded-full"
-                            src="https://avatars.githubusercontent.com/u/73503432?v=4"
+                            src={userImage}
                             alt=""
                         />
                     </div>
@@ -49,7 +55,7 @@ const Blog = (props) => {
                         <p
                             className="text-sm font-medium text-gray-900 hover:underline"
                         >
-                            Learn with sumit
+                            {userName}
                         </p>
                         <div
                             className="flex space-x-1 text-sm text-gray-500"

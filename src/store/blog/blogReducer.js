@@ -31,8 +31,6 @@ const blogReducer = (state = inittialState, action) => {
                 postLoading: false
             }
         }
-
-
         default:
             return state
     }

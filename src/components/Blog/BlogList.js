@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Blog from './Blog'
 import BlogHeader from './BlogHeader'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Loading from '../Loading/Loading'
+import { fetchUser } from '../../store/user/userActionCreateors'
 
 const BlogList = () => {
 
     const blogPosts = useSelector(state => state.blog.blogPosts)
     const postLoading = useSelector(state => state.blog.postLoading)
-
+    const dispatch = useDispatch()
+    const userList = useSelector(state => state.user.userList)
+    // console.log(userList)
     // console.log(postLoading)
 
     let showBlog = []
@@ -16,6 +19,10 @@ const BlogList = () => {
     if (blogPosts.length > 0) {
         showBlog = blogPosts
     }
+
+    useEffect(() => {
+        dispatch(fetchUser())
+    }, [])
 
     return (
         <section
@@ -36,8 +43,14 @@ const BlogList = () => {
                     {
 
                         showBlog.map(item => {
+
+                            const userDetail = userList.find(user => {
+                                return user.userId === item.userId
+                            })
+
                             return (
                                 <Blog
+                                    user={userDetail}
                                     key={item.id}
                                     blog={item}
                                 />
