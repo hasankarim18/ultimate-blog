@@ -1,13 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Blog = (props) => {
 
 
     const { id, image, title, userId, date, body, category } = props.blog
-    // const { name } = props.user
-    //const userImage = props.user.image
-    // console.log(props.user)
+
+    const isUserLoad = useSelector(state => state.user.loadUserFailed)
+    // const userName = props.user.name
     const userName = props.user.name
+    console.log(props.user)
+
     const userImage = props.user.image
 
     return (

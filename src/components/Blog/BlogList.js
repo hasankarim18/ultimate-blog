@@ -11,6 +11,7 @@ const BlogList = () => {
     const postLoading = useSelector(state => state.blog.postLoading)
     const dispatch = useDispatch()
     const userList = useSelector(state => state.user.userList)
+    const isUserLoad = useSelector(state => state.user.loadUserFailed)
     // console.log(userList)
     // console.log(postLoading)
 
@@ -43,10 +44,15 @@ const BlogList = () => {
                     {
 
                         showBlog.map(item => {
+                            let userDetail = {
+                                name: 'Author Name',
+                            }
+                            if (isUserLoad === false) {
+                                userDetail = userList.find(user => {
+                                    return user.userId === item.userId
+                                })
+                            }
 
-                            const userDetail = userList.find(user => {
-                                return user.userId === item.userId
-                            })
 
                             return (
                                 <Blog
