@@ -1,7 +1,7 @@
 import { GET_SEARCH_TEXT } from "./searchActionType"
 
 const initialState = {
-    searchText: ''
+    searchText: null
 }
 
 
@@ -11,7 +11,10 @@ const searchReducer = (state = initialState, action) => {
             ...state,
             searchText: action.payload
         }
+    } else {
+        return state
     }
+
 }
 
 export default searchReducer

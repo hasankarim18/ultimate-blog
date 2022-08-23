@@ -9,9 +9,13 @@ const BlogList = () => {
 
     const blogPosts = useSelector(state => state.blog.blogPosts)
     const postLoading = useSelector(state => state.blog.postLoading)
+    const postLoadFailed = useSelector(state => state.blog.postLoadFailed)
+    const searchText = useSelector(state => state.search.searchText)
+    //  console.log(searchText)
     const dispatch = useDispatch()
     const userList = useSelector(state => state.user.userList)
     const isUserLoad = useSelector(state => state.user.loadUserFailed)
+
     // console.log(userList)
     // console.log(postLoading)
 
@@ -35,17 +39,26 @@ const BlogList = () => {
 
             <div className="relative max-w-7xl mx-auto">
                 <BlogHeader />
-
+                <br /><br />
+                <div>
+                    {postLoading ? <Loading /> : null}
+                    {postLoadFailed && <h1 style={{ textAlign: "center", fontSize: "30px", color: "orangered" }} >No Connection</h1>}
+                </div>
                 {/* <!-- card grid  --> */}
                 <div
                     className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
                 >
-                    {postLoading ? <Loading /> : null}
                     {
 
                         showBlog
                             .filter(post => {
-                                return true
+                                if (searchText.trim().length === 0) {
+                                    return true
+                                } else {
+
+                                    return post.title.trim().toLowerCase().includes(searchText.trim().toLowerCase())
+                                }
+
                             })
                             .map(item => {
                                 let userDetail = {}
@@ -58,6 +71,7 @@ const BlogList = () => {
                                         user={userDetail}
                                         key={item.id}
                                         blog={item}
+                                        body={item.body}
                                     />
                                 )
                             })

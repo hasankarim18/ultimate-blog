@@ -1,18 +1,22 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import dateFormat from "dateformat";
 
 const Blog = (props) => {
 
 
     const { id, image, title, userId, date, body, category } = props.blog
 
-    const isUserLoad = useSelector(state => state.user.loadUserFailed)
-    // const userName = props.user.name
-    // console.log(props.user)
-    const userName = props.user.name
-    //  console.log(props.user)
+    const showDate = dateFormat(date, "d mmm, yyyy");
 
+    const userName = props.user.name
     const userImage = props.user.image
+
+    const minRead = (text) => {
+        const wordPerMin = 60
+        return Math.ceil(text.trim().length / wordPerMin)
+
+    }
 
     return (
         // < !--single card-- >
@@ -36,7 +40,8 @@ const Blog = (props) => {
                             style={{ textTransform: "capitalize" }}
                             className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800"
                         >
-                            {category}
+                            {/* {category} */}
+                            {category.length > 0 ? category.map(item => item).join(' | ') : 'No category'}
                         </span>
                     </p>
                     <a href="#" className="block mt-1">
@@ -65,12 +70,12 @@ const Blog = (props) => {
                             className="flex space-x-1 text-sm text-gray-500"
                         >
                             <time
-                            >11 Jul, 2022
+                            >{showDate}
                             </time>
                             <span aria-hidden="true">
                                 &middot;
                             </span>
-                            <span> 6 min read </span>
+                            <span> {minRead(body).toLocaleString()} min read </span>
                         </div>
                     </div>
                 </div>
