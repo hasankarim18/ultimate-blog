@@ -32,7 +32,6 @@ export const fetchPost = () => {
         dispatch(postLoading())
         axios.get(url + '/blogPosts')
             .then(res => {
-                // console.log(res)
                 dispatch(postLoaded(res.data))
             })
             .catch(err => {

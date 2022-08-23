@@ -43,25 +43,24 @@ const BlogList = () => {
                     {postLoading ? <Loading /> : null}
                     {
 
-                        showBlog.map(item => {
-                            let userDetail = {
-                                name: 'Author Name',
-                            }
-                            if (isUserLoad === false) {
-                                userDetail = userList.find(user => {
-                                    return user.userId === item.userId
-                                })
-                            }
+                        showBlog
+                            .filter(post => {
+                                return true
+                            })
+                            .map(item => {
+                                let userDetail = {}
+                                if (userList.length > 1) {
+                                    userDetail = userList.find(user => user.userId === item.userId)
+                                }
 
-
-                            return (
-                                <Blog
-                                    user={userDetail}
-                                    key={item.id}
-                                    blog={item}
-                                />
-                            )
-                        })
+                                return (
+                                    <Blog
+                                        user={userDetail}
+                                        key={item.id}
+                                        blog={item}
+                                    />
+                                )
+                            })
                     }
                 </div>
 

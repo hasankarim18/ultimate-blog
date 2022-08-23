@@ -8,8 +8,9 @@ const Blog = (props) => {
 
     const isUserLoad = useSelector(state => state.user.loadUserFailed)
     // const userName = props.user.name
+    // console.log(props.user)
     const userName = props.user.name
-    console.log(props.user)
+    //  console.log(props.user)
 
     const userImage = props.user.image
 

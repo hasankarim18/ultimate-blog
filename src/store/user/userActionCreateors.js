@@ -22,7 +22,10 @@ export const fetchUser = () => {
     return dispatch => {
         axios.get(url + '/blogUser')
             .then(res => {
+
                 dispatch(loadUser(res.data))
+
+
             })
             .catch(err => {
                 dispatch(load_user_failed())

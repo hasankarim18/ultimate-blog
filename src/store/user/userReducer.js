@@ -14,14 +14,15 @@ const userReducer = (state = initialState, action) => {
         case LOAD_USER:
             return {
                 ...state,
-                userList: action.payload
+                userList: action.payload,
+                loadUserFailed: false
             }
         case LOAD_USER_FAILED:
             return {
                 ...state,
+                userList: [],
                 loadUserFailed: true
             }
-
 
         default:
             return state
