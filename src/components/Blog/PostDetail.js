@@ -1,8 +1,16 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
 
 const PostDetail = (props) => {
 
-    const { image, title, body, category } = props.post
+    const selectedPostId = useSelector(state => state.blog.selectedPostId)
+    const blogPosts = useSelector(state => state.blog.blogPosts)
+
+    const selectedPost = blogPosts.find(post => post.id === selectedPostId)
+
+    const { image, title, body, category } = selectedPost
+
     return (
         <div style={{ marginBottom: "20px" }}
             className="flex flex-col rounded-lg shadow-lg overflow-hidden"

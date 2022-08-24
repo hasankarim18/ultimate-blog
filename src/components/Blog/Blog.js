@@ -13,6 +13,11 @@ const Blog = (props) => {
     const openDetail = useSelector(state => state.blog.openPostDetail)
     const dispatch = useDispatch()
     const { id, image, userId, title, date, body, category } = props.blog
+    //  console.log(props.blog)
+
+    //  console.log(selectedPostId)
+
+
 
     const showDate = dateFormat(date, "d mmm, yyyy");
     //const userId = props.userId
@@ -29,10 +34,10 @@ const Blog = (props) => {
     }
 
 
-    const postDetail = () => {
+    const postDetail = (id) => {
         //   setModalOpen(!modalOpen)
         // setModalOpen(prev =>  !prev)
-        dispatch(openPostDetail())
+        dispatch(openPostDetail(id))
 
     }
 
@@ -65,14 +70,14 @@ const Blog = (props) => {
 
                             </span>
                         </p>
-                        <a onClick={postDetail} href="#" className="block mt-1">
+                        <a onClick={() => postDetail(id)} href="#" className="block mt-1">
                             <p
                                 className="text-xl font-semibold text-gray-900 cursor-pointer"
                             >
                                 {title}
                             </p>
                         </a>
-                        {openDetail && <Modal onClose={postDetail} > <PostDetail post={props.blog} /> </Modal>}
+                        {openDetail && <Modal onClose={postDetail} > <PostDetail /> </Modal>}
 
                     </div>
                     <UserInfo

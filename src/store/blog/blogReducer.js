@@ -7,7 +7,8 @@ const inittialState = {
     postLoading: true,
     postLoadFailed: false,
     openPostDetail: false,
-    openUserDetails: false
+    openUserDetails: false,
+    selectedPostId: null
 }
 
 
@@ -38,7 +39,8 @@ const blogReducer = (state = inittialState, action) => {
         case OPEN_POST_DETAIL:
             return {
                 ...state,
-                openPostDetail: !state.openPostDetail
+                openPostDetail: !state.openPostDetail,
+                selectedPostId: action.payload
             }
         case OPEN_USER_DETAILS:
             return {

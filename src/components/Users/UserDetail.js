@@ -26,8 +26,8 @@ const UserDetail = (props) => {
 
     const usersPublishedPost = blogPosts.filter(item => item.userId === selecteAuthorId)
 
-    const postDetailHandler = () => {
-        dispatch(openPostDetail())
+    const postDetailHandler = (id) => {
+        dispatch(openPostDetail(id))
 
     }
 
@@ -53,7 +53,7 @@ const UserDetail = (props) => {
                         const { image, title, body, category } = post
 
                         return (
-                            <p key={post.id} onClick={postDetailHandler}
+                            <p key={post.id} onClick={() => postDetailHandler(post.id)}
                                 className="hover:underline cursor-pointer" > <strong>{index + 1}</strong>. {post.title}
                                 {postDetail &&
                                     <Modal>

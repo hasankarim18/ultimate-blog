@@ -41,9 +41,10 @@ export const fetchPost = () => {
     }
 }
 
-export const openPostDetail = () => {
+export const openPostDetail = (postId) => {
     return {
-        type: OPEN_POST_DETAIL
+        type: OPEN_POST_DETAIL,
+        payload: postId
     }
 }
 
