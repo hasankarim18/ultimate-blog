@@ -4,6 +4,9 @@ import BlogHeader from './BlogHeader'
 import { useSelector, useDispatch } from 'react-redux'
 import Loading from '../Loading/Loading'
 import { fetchUser } from '../../store/user/userActionCreateors'
+import { backToOriginalPosts } from '../../store/search/searchActionCrators'
+
+
 
 const BlogList = () => {
 
@@ -11,13 +14,11 @@ const BlogList = () => {
     const postLoading = useSelector(state => state.blog.postLoading)
     const postLoadFailed = useSelector(state => state.blog.postLoadFailed)
     const searchText = useSelector(state => state.search.searchText)
-    //  console.log(searchText)
+    const filterByUserId = useSelector(state => state.search.filterByUserId)
     const dispatch = useDispatch()
     const userList = useSelector(state => state.user.userList)
-    const isUserLoad = useSelector(state => state.user.loadUserFailed)
 
-    // console.log(userList)
-    // console.log(postLoading)
+
 
     let showBlog = []
 
@@ -29,17 +30,54 @@ const BlogList = () => {
         dispatch(fetchUser())
     }, [])
 
+    const allPost = (posts) => {
+        dispatch(backToOriginalPosts())
+    }
+
+    function searchTextFilter(post) {
+        if (this.trim().length === 0) {
+            return true
+        } else {
+            return post.title.trim().toLowerCase().includes(this.trim().toLowerCase())
+        }
+    }
+
+    function userIdFilter(post) {
+        if (this === null) {
+            return true
+        } else {
+            return post.userId === this
+        }
+    }
+
+    let postNumber = showBlog.filter(searchTextFilter, searchText).filter(userIdFilter, filterByUserId)
+
+
+
     return (
         <section
             className="relative bg-gray-50 pt-8 pb-20 px-4 sm:px-6 lg:pt-16 lg:pb-16 lg:px-8"
         >
+
             <div className="absolute inset-0">
                 <div className="bg-white h-1/3 sm:h-2/3"></div>
             </div>
 
             <div className="relative max-w-7xl mx-auto">
                 <BlogHeader />
-                <br /><br />
+
+                {
+                    filterByUserId &&
+                    <h1
+                        onClick={allPost}
+                        className="underline cursor-pointer" >
+                        Back to all posts
+                    </h1>
+                }
+                <div className="text-right">
+                    Total Posts:  {postNumber.length}
+                </div>
+
                 <div>
                     {postLoading ? <Loading /> : null}
                     {postLoadFailed && <h1 style={{ textAlign: "center", fontSize: "30px", color: "orangered" }} >No Connection</h1>}
@@ -51,27 +89,21 @@ const BlogList = () => {
                     {
 
                         showBlog
-                            .filter(post => {
-                                if (searchText.trim().length === 0) {
-                                    return true
-                                } else {
+                            .filter(searchTextFilter, searchText)
+                            .filter(userIdFilter, filterByUserId)
+                            .map(post => {
 
-                                    return post.title.trim().toLowerCase().includes(searchText.trim().toLowerCase())
-                                }
-
-                            })
-                            .map(item => {
                                 let userDetail = {}
                                 if (userList.length > 1) {
-                                    userDetail = userList.find(user => user.userId === item.userId)
+                                    userDetail = userList.find(user => user.userId === post.userId)
                                 }
 
                                 return (
                                     <Blog
                                         user={userDetail}
-                                        key={item.id}
-                                        blog={item}
-                                        body={item.body}
+                                        key={post.id}
+                                        blog={post}
+                                        body={post.body}
                                     />
                                 )
                             })

@@ -1,4 +1,4 @@
-import { POST_LOADED, POST_LOADING, POST_LOAD_FAILED } from "./blogActionTypes";
+import { POST_LOADED, POST_LOADING, POST_LOAD_FAILED, OPEN_POST_DETAIL } from "./blogActionTypes";
 import axios from 'axios'
 import url from "../url";
 
@@ -38,5 +38,11 @@ export const fetchPost = () => {
                 dispatch(postLoadFailed())
                 console.log(err)
             })
+    }
+}
+
+export const openPostDetail = () => {
+    return {
+        type: OPEN_POST_DETAIL
     }
 }

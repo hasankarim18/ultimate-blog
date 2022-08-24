@@ -1,0 +1,57 @@
+.backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 99;
+}
+
+.modal {
+    position: fixed;
+    top: 70px;
+    width: 40rem;
+    height: 30rem;
+    background-color: #fff;
+    z-index: 999;
+    padding: 50px;
+    left: 25%;
+    border-radius: 10px;
+    overflow-y: auto;
+    animation-name: modal;
+    animation-duration: 0.5s;
+}
+
+@media only screen and (max-width: 768px) {
+    .modal {
+        left: 20px;
+        right: 20px;
+        width: 90%;
+    }
+}
+
+.close {
+    font-size: 16px;
+    border: 1px solid lightblue;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: orangered;
+    transition: 0.3s ease-out;
+}
+
+.close:hover {
+    border: 1px solid orangered;
+}
+
+
+@keyframes modal {
+    from {
+        transform: translateY(100px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}

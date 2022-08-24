@@ -1,7 +1,8 @@
-import { GET_SEARCH_TEXT } from "./searchActionType"
+import { GET_SEARCH_TEXT, FILTER_BY_USERID, BACK_TO_ORIGINAL_POSTS } from "./searchActionType"
 
 const initialState = {
-    searchText: null
+    searchText: '',
+    filterByUserId: null
 }
 
 
@@ -11,7 +12,21 @@ const searchReducer = (state = initialState, action) => {
             ...state,
             searchText: action.payload
         }
-    } else {
+    } else if (action.type === FILTER_BY_USERID) {
+        return {
+            ...state,
+            filterByUserId: action.payload
+        }
+    } else if (action.type === BACK_TO_ORIGINAL_POSTS) {
+
+        return {
+            ...state,
+            searchText: '',
+            filterByUserId: null
+
+        }
+    }
+    else {
         return state
     }
 

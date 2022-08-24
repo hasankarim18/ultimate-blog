@@ -1,0 +1,42 @@
+.userDetail {
+    display: flex;
+
+}
+
+.userDetail img {
+    max-width: 200px;
+    padding: 10px;
+    border: 1px solid grey;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.info h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.info h1 span {
+    font-size: 26px;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.info p {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.info p span {
+    font-size: 18px;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.title {
+    margin-top: 30px;
+}
+
+.title p {
+    margin-top: 3px;
+}
