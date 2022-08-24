@@ -26,7 +26,7 @@ const UserInfo = ({ userName, userImage, showDate, minRead, body, userId, select
     return (
         <div className="mt-6 flex items-center">
             <div className="flex-shrink-0">
-                <img onClick={openUserDetailHandler}
+                <img onClick={() => openUserDetailHandler(userId)}
                     className="cursor-pointer h-10 w-10 rounded-full"
                     src={userImage}
                     alt=""
