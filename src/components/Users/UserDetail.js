@@ -14,6 +14,7 @@ const UserDetail = (props) => {
     const dispatch = useDispatch()
 
     const selectedUser = userList.find(user => user.id === props.userId)
+    // console.log(selectedUser)
     const { image, name, userId } = selectedUser
 
     const usersPublishedPost = blogPosts.filter(item => item.userId === props.userId)
@@ -48,8 +49,8 @@ const UserDetail = (props) => {
                             <p key={post.id} onClick={postDetailHandler}
                                 className="hover:underline cursor-pointer" > <strong>{index + 1}</strong>. {post.title}
                                 {postDetail &&
-                                    <Modal onClose={postDetailHandler} >
-                                        <PostDetail onClose={postDetailHandler} post={{ image, title, body, category }} />
+                                    <Modal>
+                                        <PostDetail post={{ image, title, body, category }} />
                                     </Modal>}
                             </p>
 

@@ -1,4 +1,4 @@
-import { POST_LOADED, POST_LOADING, POST_LOAD_FAILED, OPEN_POST_DETAIL } from "./blogActionTypes";
+import { POST_LOADED, POST_LOADING, POST_LOAD_FAILED, OPEN_POST_DETAIL, OPEN_USER_DETAILS } from "./blogActionTypes";
 
 
 const inittialState = {
@@ -7,7 +7,7 @@ const inittialState = {
     postLoading: true,
     postLoadFailed: false,
     openPostDetail: false,
-    openPostDetailInsideUser: false
+    openUserDetails: false
 }
 
 
@@ -39,6 +39,11 @@ const blogReducer = (state = inittialState, action) => {
             return {
                 ...state,
                 openPostDetail: !state.openPostDetail
+            }
+        case OPEN_USER_DETAILS:
+            return {
+                ...state,
+                openUserDetails: !state.openUserDetails
             }
 
 

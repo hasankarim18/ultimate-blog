@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import dateFormat from "dateformat";
 import Modal from '../ui/Modal/Modal'
 import PostDetail from './PostDetail';
 import UserInfo from './UserInfo';
 import { openPostDetail } from '../../store/blog/blogActionCreator';
+import { filterByCategory } from '../../store/search/searchActionCrators';
 
 const Blog = (props) => {
 
-    const [modalOpen, setModalOpen] = useState(false)
+
     const openDetail = useSelector(state => state.blog.openPostDetail)
     const dispatch = useDispatch()
     const { id, image, title, userId, date, body, category } = props.blog
@@ -23,6 +24,9 @@ const Blog = (props) => {
         return Math.ceil(text.trim().length / wordPerMin)
     }
 
+    const filterByCategoryHandler = (cat) => {
+        dispatch(filterByCategory(cat))
+    }
 
 
     const postDetail = () => {
@@ -53,7 +57,7 @@ const Blog = (props) => {
                 >
                     <div className="flex-1">
                         <p className="text-sm font-medium text-indigo-600">
-                            <span
+                            <span onClick={() => filterByCategoryHandler(category)}
                                 style={{ textTransform: "capitalize" }}
                                 className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 cursor-pointer"
                             >

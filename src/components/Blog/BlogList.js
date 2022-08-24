@@ -15,6 +15,8 @@ const BlogList = () => {
     const postLoadFailed = useSelector(state => state.blog.postLoadFailed)
     const searchText = useSelector(state => state.search.searchText)
     const filterByUserId = useSelector(state => state.search.filterByUserId)
+    const filterByCategory = useSelector(state => state.search.filterByCategory)
+
     const dispatch = useDispatch()
     const userList = useSelector(state => state.user.userList)
 
@@ -67,7 +69,7 @@ const BlogList = () => {
                 <BlogHeader />
 
                 {
-                    filterByUserId &&
+                    filterByUserId || filterByCategory !== 'ALL' &&
                     <h1
                         onClick={allPost}
                         className="underline cursor-pointer" >
@@ -91,6 +93,13 @@ const BlogList = () => {
                         showBlog
                             .filter(searchTextFilter, searchText)
                             .filter(userIdFilter, filterByUserId)
+                            .filter((post) => {
+                                if (filterByCategory === 'ALL') {
+                                    return true
+                                } else {
+                                    return post.category === filterByCategory
+                                }
+                            })
                             .map(post => {
 
                                 let userDetail = {}

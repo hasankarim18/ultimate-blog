@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { filterByUserId } from '../../store/search/searchActionCrators'
 import Modal from '../ui/Modal/Modal'
 import UserDetail from '../Users/UserDetail'
+import { openUserDetails } from '../../store/blog/blogActionCreator'
 
 const UserInfo = ({ userName, userImage, showDate, minRead, body, userId, selectUserId }) => {
 
     const [showUserDetail, setShowUserDetail] = useState(false)
+    const toggleUserDetail = useSelector(state => state.blog.openUserDetails)
     const dispatch = useDispatch()
 
     const filterByUserIdHandler = (id) => {
@@ -14,7 +16,8 @@ const UserInfo = ({ userName, userImage, showDate, minRead, body, userId, select
     }
 
     const openUserDetailHandler = () => {
-        setShowUserDetail(prevState => !prevState)
+        // setShowUserDetail(prevState => !prevState)
+        dispatch(openUserDetails())
     }
 
     return (
@@ -46,7 +49,7 @@ const UserInfo = ({ userName, userImage, showDate, minRead, body, userId, select
                     <span> {minRead(body).toLocaleString()} min read </span>
                 </div>
             </div>
-            {showUserDetail && <Modal onClose={openUserDetailHandler} > <UserDetail userId={userId} /> </Modal>}
+            {toggleUserDetail && <Modal onClose={openUserDetailHandler} > <UserDetail userId={userId} /> </Modal>}
         </div>
     )
 }
