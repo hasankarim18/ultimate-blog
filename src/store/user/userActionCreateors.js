@@ -1,4 +1,4 @@
-import { LOAD_USER, LOAD_USER_FAILED } from "./userActionType";
+import { LOAD_USER, LOAD_USER_FAILED, OPEN_AUTHOR_DETAILS } from "./userActionType";
 import axios from "axios";
 import url from "../url";
 
@@ -31,5 +31,12 @@ export const fetchUser = () => {
                 dispatch(load_user_failed())
                 console.log(err)
             })
+    }
+}
+
+export const openAuthorDetails = (userId) => {
+    return {
+        type: OPEN_AUTHOR_DETAILS,
+        payload: userId
     }
 }

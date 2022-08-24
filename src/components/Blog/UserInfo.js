@@ -3,21 +3,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { filterByUserId } from '../../store/search/searchActionCrators'
 import Modal from '../ui/Modal/Modal'
 import UserDetail from '../Users/UserDetail'
-import { openUserDetails } from '../../store/blog/blogActionCreator'
+import { openAuthorDetails } from '../../store/user/userActionCreateors'
 
 const UserInfo = ({ userName, userImage, showDate, minRead, body, userId, selectUserId }) => {
 
     const [showUserDetail, setShowUserDetail] = useState(false)
-    const toggleUserDetail = useSelector(state => state.blog.openUserDetails)
+    const toggleUserDetail = useSelector(state => state.user.openAuthorDetails)
     const dispatch = useDispatch()
+
+    // console.log(toggleUserDetail)
 
     const filterByUserIdHandler = (id) => {
         dispatch(filterByUserId(id))
     }
 
-    const openUserDetailHandler = () => {
+    const openUserDetailHandler = (id) => {
         // setShowUserDetail(prevState => !prevState)
-        dispatch(openUserDetails())
+        //  dispatch(openUserDetails(id))
+        dispatch(openAuthorDetails(id))
     }
 
     return (
@@ -30,7 +33,7 @@ const UserInfo = ({ userName, userImage, showDate, minRead, body, userId, select
                 />
             </div>
             <div className="ml-3">
-                <span onClick={openUserDetailHandler}
+                <span onClick={() => openUserDetailHandler(userId)}
                     className="text-sm font-medium text-gray-900 hover:underline cursor-pointer"
                 >
                     {userName}

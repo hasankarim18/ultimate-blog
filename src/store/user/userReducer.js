@@ -1,10 +1,12 @@
-import { LOAD_USER, LOAD_USER_FAILED } from "./userActionType";
+import { LOAD_USER, LOAD_USER_FAILED, OPEN_AUTHOR_DETAILS } from "./userActionType";
 
 
 
 const initialState = {
     userList: [],
-    loadUserFailed: false
+    loadUserFailed: false,
+    selectedAuthorId: null,
+    openAuthorDetails: false
 }
 
 
@@ -23,7 +25,13 @@ const userReducer = (state = initialState, action) => {
                 userList: [],
                 loadUserFailed: true
             }
-
+        case OPEN_AUTHOR_DETAILS:
+            // console.log(action.payload)
+            return {
+                ...state,
+                selectedAuthorId: action.payload,
+                openAuthorDetails: !state.openAuthorDetails
+            }
         default:
             return state
     }

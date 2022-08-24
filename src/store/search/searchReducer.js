@@ -14,6 +14,7 @@ const searchReducer = (state = initialState, action) => {
             searchText: action.payload
         }
     } else if (action.type === FILTER_BY_USERID) {
+
         return {
             ...state,
             filterByUserId: action.payload

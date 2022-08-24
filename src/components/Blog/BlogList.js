@@ -52,7 +52,15 @@ const BlogList = () => {
         }
     }
 
-    let postNumber = showBlog.filter(searchTextFilter, searchText).filter(userIdFilter, filterByUserId)
+    function categoryFilter(post) {
+        if (this === 'ALL') {
+            return true
+        } else {
+            return post.category === this
+        }
+    }
+
+    let postNumber = showBlog.filter(searchTextFilter, searchText).filter(userIdFilter, filterByUserId).filter(categoryFilter, filterByCategory)
 
 
 
@@ -69,13 +77,15 @@ const BlogList = () => {
                 <BlogHeader />
 
                 {
-                    filterByUserId || filterByCategory !== 'ALL' &&
-                    <h1
-                        onClick={allPost}
-                        className="underline cursor-pointer" >
-                        Back to all posts
-                    </h1>
+                    filterByCategory !== 'ALL' || filterByUserId ?
+                        <h1
+                            onClick={allPost}
+                            className="underline cursor-pointer" >
+                            Back to all posts
+                        </h1>
+                        : null
                 }
+
                 <div className="text-right">
                     Total Posts:  {postNumber.length}
                 </div>
@@ -93,13 +103,7 @@ const BlogList = () => {
                         showBlog
                             .filter(searchTextFilter, searchText)
                             .filter(userIdFilter, filterByUserId)
-                            .filter((post) => {
-                                if (filterByCategory === 'ALL') {
-                                    return true
-                                } else {
-                                    return post.category === filterByCategory
-                                }
-                            })
+                            .filter(categoryFilter, filterByCategory)
                             .map(post => {
 
                                 let userDetail = {}
@@ -113,6 +117,7 @@ const BlogList = () => {
                                         key={post.id}
                                         blog={post}
                                         body={post.body}
+                                    // userId={post.userId}
                                     />
                                 )
                             })

@@ -47,8 +47,9 @@ export const openPostDetail = () => {
     }
 }
 
-export const openUserDetails = () => {
+export const openUserDetails = (userId) => {
     return {
-        type: OPEN_USER_DETAILS
+        type: OPEN_USER_DETAILS,
+        payload: userId
     }
 }

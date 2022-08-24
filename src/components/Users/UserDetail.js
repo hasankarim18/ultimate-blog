@@ -7,17 +7,24 @@ import { openPostDetail } from '../../store/blog/blogActionCreator'
 
 const UserDetail = (props) => {
 
-    // const [openPostDetail, setOpenPostDetail] = useState(false)
+    // console.log(props)
+
+
     const userList = useSelector(state => state.user.userList)
     const blogPosts = useSelector(state => state.blog.blogPosts)
     const postDetail = useSelector(state => state.blog.openPostDetail)
+    const selecteAuthorId = useSelector(state => state.user.selectedAuthorId)
     const dispatch = useDispatch()
+    // console.log(selecteAuthorId)
 
-    const selectedUser = userList.find(user => user.id === props.userId)
+
+
+
+    const selectedUser = userList.find(user => user.id === selecteAuthorId)
     // console.log(selectedUser)
     const { image, name, userId } = selectedUser
 
-    const usersPublishedPost = blogPosts.filter(item => item.userId === props.userId)
+    const usersPublishedPost = blogPosts.filter(item => item.userId === selecteAuthorId)
 
     const postDetailHandler = () => {
         dispatch(openPostDetail())

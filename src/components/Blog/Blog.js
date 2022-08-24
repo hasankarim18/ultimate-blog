@@ -12,10 +12,10 @@ const Blog = (props) => {
 
     const openDetail = useSelector(state => state.blog.openPostDetail)
     const dispatch = useDispatch()
-    const { id, image, title, userId, date, body, category } = props.blog
+    const { id, image, userId, title, date, body, category } = props.blog
 
     const showDate = dateFormat(date, "d mmm, yyyy");
-
+    //const userId = props.userId
     const userName = props.user.name
     const userImage = props.user.image
 
