@@ -6,7 +6,7 @@ import PostDetail from './PostDetail';
 import UserInfo from './UserInfo';
 import { openPostDetail } from '../../store/blog/blogActionCreator';
 import { filterByCategory } from '../../store/search/searchActionCrators';
-
+import { Link } from 'react-router-dom'
 const Blog = (props) => {
 
 
@@ -50,11 +50,13 @@ const Blog = (props) => {
                 className="flex flex-col rounded-lg shadow-lg overflow-hidden"
             >
                 <div className="flex-shrink-0">
-                    <img
-                        className="h-48 w-full object-cover"
-                        src={image}
-                        alt=""
-                    />
+                    <Link to={`/post/${id}`} >
+                        <img
+                            className="h-48 w-full object-cover"
+                            src={image}
+                            alt=""
+                        />
+                    </Link>
                 </div>
 
                 <div
