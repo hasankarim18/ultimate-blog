@@ -8,5 +8,16 @@ export const OPEN_POST_DETAIL = 'openPostDetail'
 export const OPEN_USER_DETAILS = 'openUserDetails'
 
 
+export const SINGLE_POST_LOADING = 'singlepostloading'
+export const SINGLE_POST_LOADED = 'singlepostloaded'
+
+export const SINGLE_POST_FAILED = 'singlepostfailed'
+
+
+
+
+
+
+
 
 

@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react'
-import classes from './modal.module.css'
+import classNamees from './modal.module.css'
 import ReactDOM from 'react-dom'
 
 
 
 const Backdrop = (props) => {
     return (
-        <div onClick={props.onClose} className={classes.backdrop} >Backdro</div>
+        <div onClick={props.onClose} className={classNamees.backdrop} >Backdro</div>
     )
 }
 
 const ModalContent = (props) => {
     return (
-        <div className={classes.modal}>
+        <div className={classNamees.modal}>
             <div className="content" >
                 {props.children}
             </div>
             <div style={{ textAlign: 'right' }}>
-                <button onClick={props.onClose} className={classes.close}>Close</button>
+                <button onClick={props.onClose} className={classNamees.close}>Close</button>
             </div>
         </div>
     )

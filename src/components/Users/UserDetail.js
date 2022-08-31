@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import classes from './UserDetail.module.css'
+import classNamees from './UserDetail.module.css'
 import Modal from '../ui/Modal/Modal'
 import PostDetail from '../Blog/PostDetail'
 import { openPostDetail } from '../../store/blog/blogActionCreator'
@@ -35,16 +35,16 @@ const UserDetail = (props) => {
 
     return (
         <Fragment>
-            <div className={classes.userDetail}>
+            <div className={classNamees.userDetail}>
                 <img src={image} alt="" />
-                <div className={classes.info}>
+                <div className={classNamees.info}>
                     <h1>User Name: <span>{name}</span></h1>
                     <p>UserId: <span>{userId} </span></p>
                     <p>Published Post: <span>{usersPublishedPost.length}</span></p>
                 </div>
 
             </div>
-            <div className={classes.title}>
+            <div className={classNamees.title}>
                 <p>
                     <strong>Pulished Post: </strong>
                 </p>

@@ -1,4 +1,9 @@
-import { POST_LOADED, POST_LOADING, POST_LOAD_FAILED, OPEN_POST_DETAIL, OPEN_USER_DETAILS } from "./blogActionTypes";
+import {
+    POST_LOADED, POST_LOADING, POST_LOAD_FAILED, OPEN_POST_DETAIL, OPEN_USER_DETAILS,
+    SINGLE_POST_LOADING,
+    SINGLE_POST_LOADED,
+    SINGLE_POST_FAILED
+} from "./blogActionTypes";
 
 
 const inittialState = {
@@ -8,7 +13,10 @@ const inittialState = {
     postLoadFailed: false,
     openPostDetail: false,
     openUserDetails: false,
-    selectedPostId: null
+    selectedPostId: null,
+    singlePostLoading: false,
+    singelPostLoaded: {},
+    singlePostFailed: false
 }
 
 
@@ -47,8 +55,27 @@ const blogReducer = (state = inittialState, action) => {
                 ...state,
                 openUserDetails: !state.openUserDetails
             }
-
-
+        case SINGLE_POST_LOADING:
+            return {
+                ...state,
+                singelPostLoaded: {},
+                singlePostFailed: false,
+                singlePostLoading: true
+            }
+        case SINGLE_POST_LOADED:
+            return {
+                ...state,
+                singlePostLoading: false,
+                singlePostFailed: false,
+                singelPostLoaded: action.payload
+            }
+        case SINGLE_POST_FAILED:
+            return {
+                ...state,
+                singlePostLoading: false,
+                singlePostFailed: true,
+                singelPostLoaded: {}
+            }
         default:
             return state
     }
